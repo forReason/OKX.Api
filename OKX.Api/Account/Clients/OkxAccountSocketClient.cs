@@ -65,8 +65,13 @@ public class OkxAccountSocketClient(OkxWebSocketApiClient root)
     {
         var internalHandler = new Action<WebSocketDataEvent<OkxSocketUpdateResponse<List<OkxAccountPosition>>>>(data =>
         {
+            Debugger.Break();
             foreach (var d in data.Data.Data)
-                if (d is not null) onData(d);
+                if (d is not null)
+                {
+                    onData(d);
+                    Debugger.Break();
+                }
         });
 
         var arguments = new List<OkxSocketRequestArgument>();
